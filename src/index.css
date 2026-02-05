@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Farmer Core Design System - Agroforest Theme */
+
+@layer base {
+  :root {
+    --background: 45 30% 97%;
+    --foreground: 140 30% 15%;
+
+    --card: 45 25% 95%;
+    --card-foreground: 140 30% 15%;
+
+    --popover: 45 25% 95%;
+    --popover-foreground: 140 30% 15%;
+
+    --primary: 140 45% 35%;
+    --primary-foreground: 45 30% 97%;
+
+    --secondary: 45 40% 88%;
+    --secondary-foreground: 140 30% 20%;
+
+    --muted: 45 20% 90%;
+    --muted-foreground: 140 15% 40%;
+
+    --accent: 80 50% 45%;
+    --accent-foreground: 45 30% 97%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 45 30% 97%;
+
+    --border: 140 20% 85%;
+    --input: 140 20% 85%;
+    --ring: 140 45% 35%;
+
+    --radius: 0.75rem;
+
+    /* Harvest status colors */
+    --harvest-success: 140 60% 40%;
+    --harvest-warning: 40 90% 50%;
+    --harvest-expired: 0 70% 50%;
+
+    /* Safe area for mobile */
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .dark {
+    --background: 140 25% 10%;
+    --foreground: 45 30% 95%;
+
+    --card: 140 20% 14%;
+    --card-foreground: 45 30% 95%;
+
+    --popover: 140 20% 14%;
+    --popover-foreground: 45 30% 95%;
+
+    --primary: 80 50% 55%;
+    --primary-foreground: 140 30% 10%;
+
+    --secondary: 140 20% 20%;
+    --secondary-foreground: 45 30% 90%;
+
+    --muted: 140 15% 18%;
+    --muted-foreground: 45 15% 60%;
+
+    --accent: 80 45% 45%;
+    --accent-foreground: 45 30% 97%;
+
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 45 30% 97%;
+
+    --border: 140 15% 22%;
+    --input: 140 15% 22%;
+    --ring: 80 50% 55%;
+
+    --harvest-success: 140 50% 50%;
+    --harvest-warning: 40 80% 55%;
+    --harvest-expired: 0 60% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    padding-top: var(--safe-area-top);
+    padding-bottom: var(--safe-area-bottom);
+  }
+
+  /* Mobile-first touch targets */
+  button, a, [role="button"] {
+    @apply min-h-[44px] min-w-[44px];
+  }
+}
+
+@layer utilities {
+  .harvest-fresh {
+    @apply bg-[hsl(var(--harvest-success)/0.1)] text-[hsl(var(--harvest-success))] border-[hsl(var(--harvest-success))];
+  }
+
+  .harvest-warning {
+    @apply bg-[hsl(var(--harvest-warning)/0.1)] text-[hsl(var(--harvest-warning))] border-[hsl(var(--harvest-warning))];
+  }
+
+  .harvest-expired {
+    @apply bg-[hsl(var(--harvest-expired)/0.1)] text-[hsl(var(--harvest-expired))] border-[hsl(var(--harvest-expired))];
+  }
+}

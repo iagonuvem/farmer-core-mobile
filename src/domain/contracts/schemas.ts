@@ -1,0 +1,248 @@
+/**
+ * Zod Runtime Validators
+ * Must match types.ts exactly
+ */
+
+import { z } from 'zod';
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+export const CropCategoryTypeSchema = z.enum([
+  'fruits',
+  'vegetables',
+  'grains',
+  'herbs',
+  'nuts',
+  'roots',
+  'custom'
+]);
+
+export const UnitTypeSchema = z.enum([
+  'kg',
+  'g',
+  'unit',
+  'bunch',
+  'liter',
+  'ml',
+  'box',
+  'bag'
+]);
+
+export const AdjustmentReasonSchema = z.enum([
+  'sold',
+  'consumed',
+  'damage',
+  'loss',
+  'gift',
+  'correction',
+  'processing'
+]);
+
+export const ExpirationStatusSchema = z.enum(['fresh', 'expiring_soon', 'expired']);
+
+// ============================================================================
+// BASE ENTITY
+// ============================================================================
+
+export const BaseEntitySchema = z.object({
+  id: z.string().uuid(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime()
+});
+
+// ============================================================================
+// CROP/CULTURE REGISTRY
+// ============================================================================
+
+export const CropCategorySchema = BaseEntitySchema.extend({
+  name: z.string().min(1).max(100),
+  type: CropCategoryTypeSchema,
+  icon: z.string().optional(),
+  color: z.string().optional(),
+  sortOrder: z.number().int().min(0)
+});
+
+export const CropSchema = BaseEntitySchema.extend({
+  categoryId: z.string().uuid(),
+  name: z.string().min(1).max(100),
+  defaultUnit: UnitTypeSchema,
+  shelfLifeDaysDefault: z.number().int().min(1).max(365),
+  pricePerUnit: z.number().min(0).optional(),
+  guildTags: z.array(z.string()).optional(),
+  notes: z.string().max(500).optional(),
+  isFavorite: z.boolean(),
+  lastUsedAt: z.string().datetime().optional()
+});
+
+export const CultivarSchema = BaseEntitySchema.extend({
+  cropId: z.string().uuid(),
+  name: z.string().min(1).max(100),
+  shelfLifeDaysOverride: z.number().int().min(1).max(365).optional(),
+  notes: z.string().max(500).optional()
+});
+
+// ============================================================================
+// ZONES
+// ============================================================================
+
+export const ZoneSchema = BaseEntitySchema.extend({
+  name: z.string().min(1).max(100),
+  description: z.string().max(500).optional(),
+  sortOrder: z.number().int().min(0)
+});
+
+// ============================================================================
+// HARVEST & LOTS
+// ============================================================================
+
+export const HarvestEventSchema = BaseEntitySchema.extend({
+  cropId: z.string().uuid(),
+  cultivarId: z.string().uuid().optional(),
+  zoneId: z.string().uuid().optional(),
+  quantity: z.number().positive(),
+  unit: UnitTypeSchema,
+  harvestedAt: z.string().datetime(),
+  notes: z.string().max(500).optional(),
+  lotId: z.string().uuid()
+});
+
+export const LotSchema = BaseEntitySchema.extend({
+  cropId: z.string().uuid(),
+  cultivarId: z.string().uuid().optional(),
+  zoneId: z.string().uuid().optional(),
+  harvestEventId: z.string().uuid(),
+  initialQuantity: z.number().positive(),
+  quantityRemaining: z.number().min(0),
+  unit: UnitTypeSchema,
+  harvestedAt: z.string().datetime(),
+  expiresAtEstimate: z.string().datetime(),
+  notes: z.string().max(500).optional()
+});
+
+// ============================================================================
+// INVENTORY
+// ============================================================================
+
+export const InventoryAdjustmentSchema = BaseEntitySchema.extend({
+  lotId: z.string().uuid(),
+  cropId: z.string().uuid(),
+  quantityDelta: z.number(),
+  unit: UnitTypeSchema,
+  reason: AdjustmentReasonSchema,
+  notes: z.string().max(500).optional(),
+  adjustedAt: z.string().datetime()
+});
+
+export const LotSummarySchema = z.object({
+  lotId: z.string().uuid(),
+  quantityRemaining: z.number().min(0),
+  expiresAtEstimate: z.string().datetime(),
+  expirationStatus: ExpirationStatusSchema,
+  daysUntilExpiry: z.number().int()
+});
+
+export const InventorySnapshotItemSchema = z.object({
+  cropId: z.string().uuid(),
+  cropName: z.string(),
+  cultivarId: z.string().uuid().optional(),
+  cultivarName: z.string().optional(),
+  totalQuantity: z.number().min(0),
+  unit: UnitTypeSchema,
+  pricePerUnit: z.number().min(0).optional(),
+  totalValue: z.number().min(0).optional(),
+  lots: z.array(LotSummarySchema),
+  expirationStatus: ExpirationStatusSchema,
+  earliestExpiry: z.string().datetime().optional()
+});
+
+export const InventorySnapshotSchema = z.object({
+  generatedAt: z.string().datetime(),
+  items: z.array(InventorySnapshotItemSchema)
+});
+
+// ============================================================================
+// AVAILABILITY
+// ============================================================================
+
+export const AvailabilityWindowSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1).max(100),
+  startDate: z.string().datetime(),
+  endDate: z.string().datetime()
+});
+
+export const AvailabilityItemSchema = z.object({
+  id: z.string().uuid(),
+  cropId: z.string().uuid(),
+  cropName: z.string(),
+  cultivarId: z.string().uuid().optional(),
+  cultivarName: z.string().optional(),
+  quantity: z.number().min(0),
+  unit: UnitTypeSchema,
+  pricePerUnit: z.number().min(0).optional(),
+  windowId: z.string().uuid().optional(),
+  isIncluded: z.boolean(),
+  sortOrder: z.number().int().min(0)
+});
+
+export const AvailabilityListSchema = BaseEntitySchema.extend({
+  windowId: z.string().uuid().optional(),
+  windowName: z.string().optional(),
+  items: z.array(AvailabilityItemSchema),
+  headerText: z.string().max(500).optional(),
+  footerText: z.string().max(500).optional(),
+  contactInfo: z.string().max(200).optional(),
+  farmName: z.string().max(100).optional(),
+  generatedMessage: z.string().optional(),
+  isStale: z.boolean(),
+  inventorySnapshotAt: z.string().datetime()
+});
+
+export const AvailabilityConfigSchema = z.object({
+  id: z.string().uuid(),
+  farmName: z.string().max(100),
+  contactInfo: z.string().max(200),
+  defaultHeaderText: z.string().max(500),
+  defaultFooterText: z.string().max(500),
+  defaultWindowDays: z.number().int().min(1).max(30),
+  updatedAt: z.string().datetime()
+});
+
+// ============================================================================
+// EXPORT PACK
+// ============================================================================
+
+export const ExportManifestSchema = z.object({
+  schemaVersion: z.string().regex(/^\d+\.\d+\.\d+$/),
+  appVersion: z.string(),
+  exportedAt: z.string().datetime(),
+  packId: z.string().uuid(),
+  packType: z.enum(['availability', 'full_history']),
+  deviceId: z.string().optional(),
+  farmName: z.string().optional()
+});
+
+export const AvailabilityPackSchema = z.object({
+  manifest: ExportManifestSchema,
+  availabilityList: AvailabilityListSchema,
+  inventorySnapshot: InventorySnapshotSchema,
+  crops: z.array(CropSchema),
+  cultivars: z.array(CultivarSchema),
+  categories: z.array(CropCategorySchema)
+});
+
+// ============================================================================
+// APP SETTINGS
+// ============================================================================
+
+export const AppSettingsSchema = z.object({
+  id: z.string(),
+  locale: z.string(),
+  theme: z.enum(['light', 'dark', 'system']),
+  farmName: z.string().max(100),
+  contactInfo: z.string().max(200),
+  lastExportAt: z.string().datetime().optional(),
+  onboardingCompleted: z.boolean()
+});
