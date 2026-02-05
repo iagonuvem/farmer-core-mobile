@@ -1,5 +1,9 @@
 # Farmer Core: a DaVinci-style agroforest notebook (offline-first)
 
+This app promote freedom by empowering people to farm smart and easier, it helps farmers to own their own farm data and connect directly to customers network, audited by AI-powered technology.
+
+> 1 Peter 2:16 - Live as free people, but do not use your freedom as a cover or pretext for evil, but [use it and live] as bond-servants of God.
+
 ## One-line
 
 A local-first agroforestry log that turns field observations into a weekly, sellable availability list, while helping farmers learn the ecology of their system over time.
