@@ -1,7 +1,19 @@
 {
-  "name": "vite_react_shadcn_ts",
-  "private": true,
-  "version": "0.0.0",
+  "name": "katubaya-mobile",
+  "private": false,
+  "author": "iagonuvem",
+  "license": "GPL-3.0",
+  "description": "A local-first agroforestry log that turns field observations into a weekly, sellable availability list, while helping farmers own their data and learn the ecology of their system over time.",
+  "keywords": [
+    "agroforestry",
+    "mobile",
+    "app",
+    "farmer",
+    "local-first",
+    "offline-first",
+    "data-sovereignty"
+  ],
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

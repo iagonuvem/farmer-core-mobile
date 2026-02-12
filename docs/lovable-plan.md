@@ -1,7 +1,7 @@
-# Lovable Plan — Farmer Core (Offline-First Agroforest Log)
+# Lovable Plan — katubaya (Offline-First Agroforest Log)
 
 **North star:** build structure that serves life — freedom through rhythm, responsibility through clarity.
-**MVP scope:** Farmer Core only (no Bridge features).
+**MVP scope:** katubaya only (no Bridge features).
 **Core outcome:** a local-first app that turns harvest + inventory truth into a WhatsApp-ready availability message and a contract-validated Availability Pack export.
 
 ---
@@ -30,7 +30,7 @@ A simple, offline-first mobile app (Ionic + Capacitor + PWA) that empowers agrof
 * **Freedom through rhythm:** the weekly ritual is the product flow.
 * **Responsibility through clarity:** deterministic outputs, typed contracts, versioned schemas.
 * **Local-first sovereignty:** device is source of truth; sharing is explicit via export.
-* **Cooperation ecosystem:** exports enable others to build Bridges, but Farmer Core includes no marketplace, bots, rankings, or surveillance.
+* **Cooperation ecosystem:** exports enable others to build Bridges, but katubaya includes no marketplace, bots, rankings, or surveillance.
 
 ---
 

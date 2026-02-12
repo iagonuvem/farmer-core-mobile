@@ -1,6 +1,6 @@
-# Farmer Core — Typed Data Contract Skeleton (Draft)
+# katubaya — Typed Data Contract Skeleton (Draft)
 **Status:** Draft / MVP skeleton (intended to evolve)  
-**Audience:** Farmer Core app + anyone building optional “Bridges” that ingest exports  
+**Audience:** katubaya app + anyone building optional “Bridges” that ingest exports  
 **Design goals:** modularity, strong typing, offline-first, portability, zero lock-in
 
 ---
@@ -14,7 +14,7 @@
   - **PATCH**: clarifications, doc fixes, non-functional changes
 
 ### Compatibility promise
-- Farmer Core **must be able to read/export** its own historic data.
+- katubaya **must be able to read/export** its own historic data.
 - Export consumers (Bridges) should:
   - accept **same-major** versions
   - gracefully ignore unknown fields
@@ -327,7 +327,7 @@ export interface ExportChecksums {
 export interface AvailabilityPackManifest {
   schemaVersion: string;     // "1.0.0"
   exportedAt: IsoDateTime;
-  appVersion: string;        // Farmer Core app version
+  appVersion: string;        // katubaya app version
   packId: string;            // uuid
   // Integrity fields (reserved)
   checksums?: ExportChecksums;
@@ -398,7 +398,7 @@ export const CropSchema = z.object({
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://farmer-core.example/schemas/availability-pack/1.0.0.json",
+  "$id": "https://katubaya.example/schemas/availability-pack/1.0.0.json",
   "title": "AvailabilityPack",
   "type": "object",
   "required": ["manifest", "farmer", "catalog", "sites", "zones", "harvestEvents", "lots", "inventoryAdjustments", "availabilityList"],
