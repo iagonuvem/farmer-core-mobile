@@ -1,4 +1,4 @@
-# Farmer Core: a DaVinci-style agroforest notebook (offline-first)
+# Katūbayá: a DaVinci-style agroforest notebook (offline-first)
 
 This app promote freedom by empowering people to farm smart and easier, it helps farmers to own their own farm data and connect directly to customers network, audited by AI-powered technology.
 
@@ -14,7 +14,7 @@ Agroforestry thrives through cooperation: soil life, plants, fungi, insects, ani
 
 ## MVP scope
 
-This MVP builds **Farmer Core only**:
+This MVP builds **katubaya only**:
 
 * Runs fully offline after install
 * Requires no account
@@ -23,8 +23,12 @@ This MVP builds **Farmer Core only**:
 
 ## The cooperation principle (humans, like ecosystems)
 
-Farmer Core is the **Seed**: open, resilient, farmer-owned.
-A healthy ecosystem also creates niches for others to thrive. So Farmer Core is designed to enable a **Bridge ecosystem** that other builders can create (hosting, automation, signature/verification, premium setup/help, marketplace integrations), **without controlling farmers**.
+> Vovó Katūbayá protege a natureza
+
+[Xohãhi-Pataxó, Katūbayá](https://www.tiktok.com/@xohahi_pataxo/video/7288410734961134853)
+
+katubaya is the **Seed**: open, resilient, farmer-owned.
+A healthy ecosystem also creates niches for others to thrive. So katubaya is designed to enable a **Bridge ecosystem** that other builders can create (hosting, automation, signature/verification, premium setup/help, marketplace integrations), **without controlling farmers**.
 
 The rule is simple:
 

@@ -141,7 +141,7 @@ export async function exportAvailabilityPack(farmName?: string): Promise<ExportR
   // Generate ZIP
   const blob = await zip.generateAsync({ type: 'blob' });
   const date = new Date().toISOString().split('T')[0];
-  const filename = `farmer-core-availability-${date}.zip`;
+  const filename = `katubaya-availability-${date}.zip`;
 
   return {
     blob,
@@ -239,7 +239,7 @@ export async function exportFullHistory(farmName?: string): Promise<ExportResult
   // Generate ZIP
   const blob = await zip.generateAsync({ type: 'blob' });
   const date = new Date().toISOString().split('T')[0];
-  const filename = `farmer-core-full-export-${date}.zip`;
+  const filename = `katubaya-full-export-${date}.zip`;
 
   return {
     blob,

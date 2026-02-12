@@ -1,5 +1,5 @@
 /**
- * Farmer Core Domain Contracts
+ * katubaya Domain Contracts
  * Source of truth for all data types
  * Schema Version: 1.0.0
  */

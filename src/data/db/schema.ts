@@ -1,6 +1,6 @@
 /**
  * IndexedDB Schema using Dexie
- * Farmer Core Local Database
+ * katubaya Local Database
  */
 
 import Dexie, { type Table } from 'dexie';

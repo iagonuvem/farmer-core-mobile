@@ -1,4 +1,4 @@
-# Farmer Core Glossary + Domain Language
+# katubaya Glossary + Domain Language
 
 *A shared vocabulary that keeps the product modular, strongly typed, and easy to extend.*
 
